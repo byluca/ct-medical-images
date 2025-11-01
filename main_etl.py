@@ -1,4 +1,4 @@
-# main_etl.py (CORRECT)
+# main_etl.py
 
 import os
 import pydicom
@@ -40,7 +40,7 @@ JPEG_OUTPUT_DIR = "data/jpeg_images"
 
 DICOM_FILES = glob(os.path.join(DATA_DIR, "*.dcm"))
 total_files = len(DICOM_FILES)
-print(f"--- 🚀 Starting ETL Pipeline ---")
+print(f"--- Starting ETL Pipeline ---")
 print(f"Found {total_files} DICOM files to process.")
 
 # --- 2. ETL LOOP ---
@@ -117,13 +117,13 @@ for i, file_path in enumerate(DICOM_FILES):
         if jpeg_path:
             fact_study_coll.insert_one(fact_study)
         else:
-            print(f"\n  ⚠️ Skipped {os.path.basename(file_path)}. JPEG conversion failed.")
+            print(f"\n   Skipped {os.path.basename(file_path)}. JPEG conversion failed.")
 
     except Exception as e:
-        print(f"\n  ❌ Error processing {os.path.basename(file_path)}: {e}. File skipped.")
+        print(f"\n   Error processing {os.path.basename(file_path)}: {e}. File skipped.")
 
 print("\n" + "="*50)
-print("--- ✅ ETL Pipeline Completed ---")
+print("---  ETL Pipeline Completed ---")
 print(f"Database '{DB.name}' loaded.")
 print("Check results in MongoDB Compass.")
 print("="*50)
